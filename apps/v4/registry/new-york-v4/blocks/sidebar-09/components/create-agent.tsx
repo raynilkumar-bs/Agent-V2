@@ -221,7 +221,16 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
         {/* Divider */}
         <div className="ca-rise my-10 flex w-full max-w-4xl items-center gap-4" style={{ animationDelay: "250ms" }}>
           <div className="h-px flex-1 bg-border/60" />
-          <span className="text-xs text-muted-foreground">or choose a template</span>
+          <span className="text-xs text-muted-foreground">
+            <button
+              type="button"
+              onClick={() => setShowBuilder(true)}
+              className="font-medium text-blue-600 transition-colors hover:text-blue-700 hover:underline dark:text-blue-400 dark:hover:text-blue-300"
+            >
+              Build from scratch
+            </button>{" "}
+            or select from template
+          </span>
           <div className="h-px flex-1 bg-border/60" />
         </div>
 
