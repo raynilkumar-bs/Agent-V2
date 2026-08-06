@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ArrowLeft, Mic, Paperclip, Send, Sparkles } from "lucide-react"
+import { ArrowLeft, FileText, Flag, Heart, LifeBuoy, Mic, Palette, Paperclip, Send, Sparkles, ThumbsUp, TriangleAlert } from "lucide-react"
 
 import { Button } from "@/registry/new-york-v4/ui/button"
 import { Textarea } from "@/registry/new-york-v4/ui/textarea"
@@ -42,106 +42,15 @@ function gridStyle(line: string): React.CSSProperties {
 }
 
 const templates = [
-  {
-    bg: "radial-gradient(ellipse at 20% 50%, rgba(147,197,253,0.8) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(165,180,252,0.7) 0%, transparent 55%), #dbeafe",
-    title: "Professional Response", desc: "Craft formal, polished replies that maintain your brand's professional tone.",
-    wireframe: 0,
-  },
-  {
-    bg: "radial-gradient(ellipse at 30% 60%, rgba(216,180,254,0.8) 0%, transparent 55%), radial-gradient(ellipse at 70% 20%, rgba(249,168,212,0.6) 0%, transparent 60%), #f3e8ff",
-    title: "Friendly Thank You", desc: "Warm acknowledgements that make customers feel valued after positive feedback.",
-    wireframe: 1,
-  },
-  {
-    bg: "radial-gradient(ellipse at 25% 55%, rgba(110,231,183,0.7) 0%, transparent 55%), radial-gradient(ellipse at 75% 25%, rgba(147,197,253,0.5) 0%, transparent 60%), #d1fae5",
-    title: "Service Recovery", desc: "Turn negative reviews into opportunities with empathetic responses.",
-    wireframe: 2,
-  },
-  {
-    bg: "radial-gradient(ellipse at 20% 60%, rgba(251,207,232,0.9) 0%, transparent 55%), radial-gradient(ellipse at 80% 30%, rgba(216,180,254,0.6) 0%, transparent 55%), #fce7f3",
-    title: "Brand Voice Match", desc: "AI-tuned responses that mirror your brand's unique tone and personality.",
-    wireframe: 3,
-  },
-  {
-    bg: "radial-gradient(ellipse at 30% 50%, rgba(253,186,116,0.8) 0%, transparent 55%), radial-gradient(ellipse at 75% 25%, rgba(252,165,165,0.6) 0%, transparent 55%), #ffedd5",
-    title: "Issue Acknowledgement", desc: "Empathetic responses that acknowledge concerns and reassure customers.",
-    wireframe: 4,
-  },
-  {
-    bg: "radial-gradient(ellipse at 25% 55%, rgba(165,180,252,0.8) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(147,197,253,0.6) 0%, transparent 60%), #e0e7ff",
-    title: "Positive Reinforcement", desc: "Amplify great reviews and inspire others to share their experiences.",
-    wireframe: 5,
-  },
-  {
-    bg: "radial-gradient(ellipse at 20% 60%, rgba(167,243,208,0.8) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(110,231,183,0.5) 0%, transparent 55%), #ecfdf5",
-    title: "Smart Follow-up", desc: "Timely, personalised follow-up messages that re-engage customers and build lasting relationships.",
-    wireframe: 6,
-  },
-  {
-    bg: "radial-gradient(ellipse at 25% 55%, rgba(253,186,116,0.7) 0%, transparent 55%), radial-gradient(ellipse at 80% 25%, rgba(252,211,77,0.5) 0%, transparent 55%), #fffbeb",
-    title: "Escalation Handler", desc: "Professionally escalate critical reviews to management while keeping customers informed.",
-    wireframe: 7,
-  },
+  { icon: FileText, tile: "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300", title: "Professional Response", desc: "Craft formal, polished replies that maintain your brand's professional tone." },
+  { icon: Heart, tile: "bg-rose-50 text-rose-700 dark:bg-rose-500/10 dark:text-rose-300", title: "Friendly Thank You", desc: "Warm acknowledgements that make customers feel valued after positive feedback." },
+  { icon: LifeBuoy, tile: "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300", title: "Service Recovery", desc: "Turn negative reviews into opportunities with empathetic responses." },
+  { icon: Palette, tile: "bg-violet-50 text-violet-700 dark:bg-violet-500/10 dark:text-violet-300", title: "Brand Voice Match", desc: "AI-tuned responses that mirror your brand's unique tone and personality." },
+  { icon: TriangleAlert, tile: "bg-orange-50 text-orange-700 dark:bg-orange-500/10 dark:text-orange-300", title: "Issue Acknowledgement", desc: "Empathetic responses that acknowledge concerns and reassure customers." },
+  { icon: ThumbsUp, tile: "bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300", title: "Positive Reinforcement", desc: "Amplify great reviews and inspire others to share their experiences." },
+  { icon: Send, tile: "bg-teal-50 text-teal-700 dark:bg-teal-500/10 dark:text-teal-300", title: "Smart Follow-up", desc: "Timely, personalised follow-up messages that re-engage customers and build lasting relationships." },
+  { icon: Flag, tile: "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300", title: "Escalation Handler", desc: "Professionally escalate critical reviews to management while keeping customers informed." },
 ]
-
-function WireframeCard({ idx }: { idx: number }) {
-  if (idx === 0) return (
-    <div className="space-y-2">
-      <div className="flex items-center gap-1.5"><div className="size-5 shrink-0 animate-pulse rounded-full bg-slate-200" /><div className="h-1.5 w-14 animate-pulse rounded-full bg-slate-200" /><div className="ml-auto flex gap-0.5">{[0,1,2,3,4].map(s=><svg key={s} width="8" height="8" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}</div></div>
-      <div className="space-y-1"><div className="h-1.5 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-1.5 w-4/5 animate-pulse rounded-full bg-slate-100" /></div>
-      <div className="rounded-lg bg-violet-50 p-2 ring-1 ring-violet-100"><div className="flex items-center gap-1"><span className="text-[8px] font-semibold text-violet-600">✦ AI reply</span><div className="ml-auto flex gap-0.5">{[0,1,2].map(d=><span key={d} className="size-1 animate-bounce rounded-full bg-violet-400" style={{animationDelay:`${d*150}ms`}}/>)}</div></div></div>
-    </div>
-  )
-  if (idx === 1) return (
-    <div className="space-y-2">
-      <div className="flex justify-start"><div className="rounded-2xl rounded-tl-sm bg-slate-100 px-2.5 py-1.5"><div className="h-1.5 w-20 animate-pulse rounded-full bg-slate-300" /><div className="mt-1 h-1.5 w-14 animate-pulse rounded-full bg-slate-200" /></div></div>
-      <div className="flex justify-end"><div className="rounded-2xl rounded-tr-sm bg-violet-100 px-2.5 py-1.5"><div className="h-1.5 w-16 animate-pulse rounded-full bg-violet-300" /><div className="mt-1 h-1.5 w-12 animate-pulse rounded-full bg-violet-200" /></div></div>
-      <div className="flex items-center gap-1"><span className="text-[8px] font-semibold text-violet-500">✦ AI drafting</span><div className="flex gap-0.5">{[0,1,2].map(d=><span key={d} className="size-1 animate-bounce rounded-full bg-violet-300" style={{animationDelay:`${d*150}ms`}}/>)}</div></div>
-    </div>
-  )
-  if (idx === 2) return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between"><div className="flex h-4 items-center rounded-md bg-red-100 px-1.5"><span className="text-[8px] font-semibold text-red-600">1-star Review</span></div><div className="h-1.5 w-10 animate-pulse rounded-full bg-slate-100" /></div>
-      <div className="space-y-1"><div className="h-1.5 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-1.5 w-3/5 animate-pulse rounded-full bg-slate-100" /></div>
-      <div className="flex gap-1.5"><div className="h-4 flex-1 animate-pulse rounded-md bg-slate-100" /><div className="flex h-4 items-center rounded-md bg-emerald-100 px-1.5"><span className="text-[8px] font-semibold text-emerald-600">Resolved ✓</span></div></div>
-    </div>
-  )
-  if (idx === 3) return (
-    <div className="space-y-2">
-      <div className="flex items-center gap-2"><div className="flex size-6 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-pink-400 to-rose-500 text-[8px] font-bold text-white">B</div><div className="space-y-1"><div className="h-1.5 w-16 animate-pulse rounded-full bg-slate-200" /><div className="h-1.5 w-10 animate-pulse rounded-full bg-slate-100" /></div></div>
-      <div className="flex gap-1">{["Friendly","Professional","Warm"].map(t=><div key={t} className="rounded-full bg-slate-100 px-1.5 py-0.5 text-[7px] text-slate-500">{t}</div>)}</div>
-      <div className="h-1.5 w-full animate-pulse rounded-full bg-slate-100" />
-    </div>
-  )
-  if (idx === 4) return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between"><div className="flex h-4 items-center gap-1 rounded-md bg-orange-100 px-1.5"><span className="text-[8px] font-semibold text-orange-600">⚠ Issue</span></div><span className="text-[8px] text-slate-400">#2841</span></div>
-      <div className="space-y-1"><div className="h-1.5 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-1.5 w-2/3 animate-pulse rounded-full bg-slate-100" /></div>
-      <div className="flex items-center gap-1.5"><div className="size-4 animate-pulse rounded-full bg-slate-200" /><div className="h-1.5 w-14 animate-pulse rounded-full bg-slate-100" /><div className="ml-auto flex h-4 items-center rounded-md bg-blue-100 px-1.5"><span className="text-[8px] text-blue-600">In Review</span></div></div>
-    </div>
-  )
-  if (idx === 5) return (
-    <div className="space-y-2">
-      <div className="flex gap-0.5">{[0,1,2,3,4].map(s=><svg key={s} width="10" height="10" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}</div>
-      <div className="space-y-1"><div className="h-1.5 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-1.5 w-5/6 animate-pulse rounded-full bg-slate-100" /><div className="h-1.5 w-3/4 animate-pulse rounded-full bg-slate-100" /></div>
-      <div className="flex items-center gap-1.5"><div className="size-4 animate-pulse rounded-full bg-slate-200" /><div className="h-1.5 w-12 animate-pulse rounded-full bg-slate-100" /></div>
-    </div>
-  )
-  if (idx === 6) return (
-    <div className="space-y-2">
-      <div className="flex items-center gap-1.5"><div className="flex h-4 items-center rounded-md bg-emerald-100 px-1.5"><span className="text-[8px] font-semibold text-emerald-600">Follow-up</span></div><div className="ml-auto h-1.5 w-10 animate-pulse rounded-full bg-slate-100" /></div>
-      <div className="space-y-1"><div className="h-1.5 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-1.5 w-4/5 animate-pulse rounded-full bg-slate-100" /></div>
-      <div className="rounded-lg bg-emerald-50 p-1.5 ring-1 ring-emerald-100"><div className="flex items-center gap-1"><span className="text-[8px] font-semibold text-emerald-600">✦ Scheduled</span><div className="ml-auto flex gap-0.5">{[0,1,2].map(d=><span key={d} className="size-1 animate-bounce rounded-full bg-emerald-400" style={{animationDelay:`${d*150}ms`}}/>)}</div></div></div>
-    </div>
-  )
-  return (
-    <div className="space-y-2">
-      <div className="flex items-center justify-between"><div className="flex h-4 items-center gap-1 rounded-md bg-amber-100 px-1.5"><span className="text-[8px] font-semibold text-amber-700">🔺 Escalated</span></div><span className="text-[8px] text-slate-400">Mgr notified</span></div>
-      <div className="space-y-1"><div className="h-1.5 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-1.5 w-3/5 animate-pulse rounded-full bg-slate-100" /></div>
-      <div className="flex items-center gap-2"><div className="size-4 animate-pulse rounded-full bg-amber-200" /><div className="h-1.5 w-16 animate-pulse rounded-full bg-slate-100" /><div className="ml-auto flex h-4 items-center rounded-md bg-amber-100 px-1.5"><span className="text-[8px] text-amber-700">Pending</span></div></div>
-    </div>
-  )
-}
 
 // Starter prompts users can pick to seed the chat instead of writing from scratch.
 // `label` keeps the chip compact; `prompt` is the fuller text dropped into the input.
@@ -355,21 +264,30 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
         <div className="ca-rise w-full max-w-4xl" style={{ animationDelay: "320ms" }}>
           <div className="grid grid-cols-4 gap-4">
             {templates.map((tpl, i) => (
-              <div key={i} className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-300 hover:shadow-md">
-                {/* Gradient + wireframe */}
-                <div className="flex h-36 items-center justify-center px-4" style={{ background: tpl.bg }}>
-                  <div className="w-full rounded-xl bg-white p-3 shadow-sm ring-1 ring-black/[0.06]">
-                    <WireframeCard idx={tpl.wireframe} />
+              <div key={i} className="group relative flex cursor-pointer flex-col rounded-2xl border border-border/60 bg-card p-5 transition-all duration-300 hover:shadow-md">
+                {/* AI gradient stroke — fades in on hover */}
+                <div
+                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    padding: "1px",
+                    background: "linear-gradient(135deg, #7c3aed, #ec4899, #3b82f6)",
+                    WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                />
+                {/* Icon + title */}
+                <div className="flex items-center gap-3">
+                  <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${tpl.tile}`}>
+                    <tpl.icon className="size-5" />
                   </div>
+                  <p className="text-sm font-semibold text-foreground">{tpl.title}</p>
                 </div>
-                {/* Content */}
-                <div className="flex flex-col gap-1.5 p-3">
-                  <p className="text-xs font-semibold text-foreground">{tpl.title}</p>
-                  <p className="line-clamp-2 text-[11px] leading-relaxed text-muted-foreground">{tpl.desc}</p>
-                  <Button variant="outline" size="sm" className="mt-1 w-full text-xs opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                    Use Template
-                  </Button>
-                </div>
+                {/* Description */}
+                <p className="mt-3 line-clamp-3 flex-1 text-xs leading-relaxed text-muted-foreground">{tpl.desc}</p>
+                <Button variant="outline" size="sm" className="mt-4 w-full opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  Use Template
+                </Button>
               </div>
             ))}
           </div>
