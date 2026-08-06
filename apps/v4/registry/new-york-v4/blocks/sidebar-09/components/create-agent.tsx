@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { ArrowLeft, FileText, Flag, Heart, LifeBuoy, Mic, Palette, Paperclip, Send, Sparkles, ThumbsUp, TriangleAlert } from "lucide-react"
+import { ArrowLeft, FileText, Flag, Heart, LifeBuoy, Mic, Palette, Paperclip, Send, ThumbsUp, TriangleAlert } from "lucide-react"
 
 import { Button } from "@/registry/new-york-v4/ui/button"
 import { Textarea } from "@/registry/new-york-v4/ui/textarea"
@@ -52,15 +52,6 @@ const templates = [
   { icon: Flag, tile: "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300", title: "Escalation Handler", desc: "Professionally escalate critical reviews to management while keeping customers informed." },
 ]
 
-// Starter prompts users can pick to seed the chat instead of writing from scratch.
-// `label` keeps the chip compact; `prompt` is the fuller text dropped into the input.
-const examples = [
-  { label: "Thank 5-star reviewers", prompt: "Thank customers for their 5-star reviews" },
-  { label: "Reply with empathy", prompt: "Reply to negative reviews with empathy" },
-  { label: "Match our brand voice", prompt: "Match our brand's friendly, casual tone" },
-  { label: "Escalate 1-star reviews", prompt: "Escalate 1-star reviews to a manager" },
-  { label: "Follow up on complaints", prompt: "Follow up after resolving a complaint" },
-]
 
 export function CreateAgent({ onBack }: { onBack: () => void }) {
   const [prompt, setPrompt] = React.useState("")
@@ -80,10 +71,6 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
   }
 
   // Move focus into the textarea; optionally seed it with an example prompt.
-  const startChat = (seed = "") => {
-    setPrompt(seed)
-    requestAnimationFrame(() => textareaRef.current?.focus())
-  }
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-[#fafaff] dark:bg-[#0b0b14]">
@@ -209,7 +196,7 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
                 <Button variant="ghost" size="icon" className="size-9">
                   <Mic className="size-4 text-muted-foreground" />
                 </Button>
-                <Button size="icon" className="size-9 rounded-xl" disabled={!prompt.trim()}>
+                <Button size="icon" className="size-9 rounded-xl" disabled={!prompt.trim()} onClick={() => setShowBuilder(true)}>
                   <Send className="size-4" />
                 </Button>
               </div>
@@ -229,28 +216,6 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
             />
           </div>
 
-          {/* Build from scratch + example starters */}
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-2 rounded-full px-5"
-              onClick={() => setShowBuilder(true)}
-            >
-              <Sparkles className="size-3.5 text-violet-500" />
-              Build from Scratch
-            </Button>
-            {examples.map((example) => (
-              <button
-                key={example.label}
-                type="button"
-                onClick={() => startChat(example.prompt)}
-                className="rounded-full border border-border/60 bg-white/70 px-4 py-1.5 text-xs text-muted-foreground shadow-sm backdrop-blur-sm transition-colors hover:bg-white hover:text-foreground dark:bg-white/5 dark:hover:bg-white/10"
-              >
-                {example.label}
-              </button>
-            ))}
-          </div>
         </div>
 
         {/* Divider */}
@@ -285,7 +250,7 @@ export function CreateAgent({ onBack }: { onBack: () => void }) {
                 </div>
                 {/* Description */}
                 <p className="mt-3 line-clamp-3 flex-1 text-xs leading-relaxed text-muted-foreground">{tpl.desc}</p>
-                <Button variant="outline" size="sm" className="mt-4 w-full opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                <Button variant="outline" size="sm" onClick={() => setShowBuilder(true)} className="mt-4 w-full opacity-0 transition-opacity duration-200 group-hover:opacity-100">
                   Use Template
                 </Button>
               </div>
