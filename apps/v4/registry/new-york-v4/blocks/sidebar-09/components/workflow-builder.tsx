@@ -229,13 +229,12 @@ const NODE_SELECTED =
   "border-2 border-blue-600 ring-2 ring-blue-400/40 shadow-[0_4px_16px_rgba(15,23,42,0.08)] dark:border-blue-400 dark:ring-blue-400/30"
 const NODE_IDLE = "border-2 border-border/60 shadow-sm hover:shadow-md"
 
-type PillSpec = { icon: React.ComponentType<{ className?: string }>; label: string; className: string }
-
-// Reference-style node shell: floating category pill above the card, title +
-// description, and a hover action rail.
+// Node shell: icon + category label + name in the header, description below,
+// and a hover action rail. (No floating pill.)
 function NodeFrame({
   id,
-  pill,
+  category,
+  categoryClass,
   title,
   description,
   icon,
@@ -246,7 +245,8 @@ function NodeFrame({
   onClick,
 }: {
   id: string
-  pill: PillSpec
+  category: string
+  categoryClass?: string
   title: string
   description?: string
   icon?: React.ComponentType<{ className?: string }>
@@ -260,7 +260,6 @@ function NodeFrame({
   const actions = React.useContext(ActionsCtx)
   const [hovered, setHovered] = React.useState(false)
   const active = hovered || selected
-  const PillIcon = pill.icon
   const StepIcon = icon
   return (
     <div
@@ -269,12 +268,6 @@ function NodeFrame({
       onMouseLeave={() => setHovered(false)}
     >
       {showTargetHandle && <Handle type="target" position={handle.target} isConnectable={false} />}
-
-      {/* Floating category pill — sits fully above the card with a small gap. */}
-      <div className={`absolute bottom-full left-1 mb-2 inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs font-semibold ${pill.className}`}>
-        <PillIcon className="size-3.5" />
-        {pill.label}
-      </div>
 
       {/* Hover / selected action rail — sits just outside the right edge. */}
       <div
@@ -305,22 +298,26 @@ function NodeFrame({
       {/* Card */}
       <div
         onClick={onClick}
-        className={`rounded-2xl border bg-card p-3.5 transition-all duration-300 ease-out ${
+        className={`rounded-2xl border bg-card p-4 transition-all duration-300 ease-out ${
           onClick ? "cursor-pointer" : ""
         } ${selected ? NODE_SELECTED : NODE_IDLE}`}
       >
-        <div className="flex items-start gap-3">
+        {/* Header — icon + (category / name) */}
+        <div className="flex items-center gap-3">
           {StepIcon && (
-            <div className={`mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-lg ${iconClass}`}>
-              <StepIcon className="size-[18px]" />
+            <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${iconClass}`}>
+              <StepIcon className="size-5" />
             </div>
           )}
           <div className="min-w-0 flex-1">
-            <p className="truncate text-[15px] font-semibold leading-tight text-foreground">{title}</p>
-            {/* Reserve exactly two lines so every card is the same height. */}
-            <p className="mt-1 line-clamp-2 min-h-[3.25em] text-[13px] leading-relaxed text-muted-foreground">{description}</p>
+            <p className={`text-xs font-semibold leading-tight ${categoryClass ?? "text-muted-foreground"}`}>{category}</p>
+            <p className="mt-0.5 truncate text-[15px] font-semibold leading-tight text-foreground">{title}</p>
           </div>
         </div>
+        {/* Description — full width, two-line reserve for a consistent height. */}
+        {description && (
+          <p className="mt-3 line-clamp-2 min-h-[3.25em] text-[13px] leading-relaxed text-muted-foreground">{description}</p>
+        )}
         <Handle type="source" position={handle.source} isConnectable={false} />
       </div>
     </div>
@@ -339,7 +336,8 @@ function WorkflowRFNode({ id, data, selected }: NodeProps) {
   return (
     <NodeFrame
       id={id}
-      pill={{ icon: meta.icon, label: meta.label, className: `${meta.chip} ${meta.accent} border-transparent` }}
+      category={meta.label}
+      categoryClass={meta.accent}
       title={d.label}
       description={d.sub}
       icon={iconForItem(d.itemId) ?? meta.icon}
@@ -372,11 +370,8 @@ function AgentRFNode({ id, data, selected }: NodeProps) {
   return (
     <NodeFrame
       id={id}
-      pill={{
-        icon: Sparkle,
-        label: "Start",
-        className: "bg-violet-100 text-violet-700 border-transparent dark:bg-violet-500/20 dark:text-violet-300",
-      }}
+      category="Start"
+      categoryClass="text-violet-700 dark:text-violet-300"
       title={d.title}
       description="Automatically drafts and posts on-brand replies to every incoming customer review across your locations."
       icon={Sparkle}
