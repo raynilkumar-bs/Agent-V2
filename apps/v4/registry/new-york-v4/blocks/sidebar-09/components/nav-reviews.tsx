@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronRight } from "lucide-react"
+import { ChevronRight, Sparkle } from "lucide-react"
 
 import { Button } from "@/registry/new-york-v4/ui/button"
 import {
@@ -68,12 +68,7 @@ export function NavReviews({
                   <span className="flex items-center gap-1.5">
                     {item.title}
                     {item.title === "Agents" && (
-                      <span
-                        className="rounded-full px-1.5 py-px text-[10px] font-semibold text-white transition-opacity duration-200 group-hover/label:opacity-80"
-                        style={{ background: "linear-gradient(135deg, #7c3aed, #ec4899, #3b82f6)" }}
-                      >
-                        New
-                      </span>
+                      <Sparkle className="size-3.5 text-violet-500 dark:text-violet-400" fill="currentColor" strokeWidth={0} />
                     )}
                   </span>
                   <ChevronRight className="ml-auto transition-transform duration-300 ease-in-out group-data-[state=open]/collapsible:rotate-90" />
