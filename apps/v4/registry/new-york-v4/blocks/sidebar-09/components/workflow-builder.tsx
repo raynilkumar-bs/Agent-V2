@@ -27,8 +27,6 @@ import {
   ArrowUp,
   CircleDot,
   ClipboardList,
-  Cloud,
-  CloudUpload,
   Columns2,
   GitBranch,
   GripVertical,
@@ -1209,15 +1207,23 @@ function BuilderInner({ onBack }: { onBack: () => void }) {
             </span>
           )}
           <div className="mx-0.5 h-4 w-px bg-border/70" />
-          <Tip label={syncTip} side="bottom">
-            <span className="flex size-8 items-center justify-center rounded-full" aria-live="polite">
-              {saving ? (
-                <CloudUpload className="size-4 animate-pulse text-muted-foreground" />
-              ) : (
-                <Cloud className="size-4 text-emerald-500" />
-              )}
-            </span>
+          <Tip label="Version history" side="bottom">
+            <button
+              type="button"
+              className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:scale-90"
+            >
+              <History className="size-4" />
+            </button>
           </Tip>
+          <Tip label="Preview" side="bottom">
+            <button
+              type="button"
+              className="flex size-8 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground active:scale-90"
+            >
+              <Play className="size-4" />
+            </button>
+          </Tip>
+          <div className="mx-0.5 h-4 w-px bg-border/70" />
           {status === "running" && (
             <Button
               variant="outline"
@@ -1300,9 +1306,6 @@ function BuilderInner({ onBack }: { onBack: () => void }) {
             <ToolbarButton label="Vertical layout" active={isVertical} onClick={() => applyLayout("vertical")}>
               <Rows2 className="size-4" />
             </ToolbarButton>
-            <div className="mx-0.5 h-4 w-px bg-border/70" />
-            <ToolbarButton label="Version history"><History className="size-4" /></ToolbarButton>
-            <ToolbarButton label="Preview"><Play className="size-4" /></ToolbarButton>
           </div>
           <Tip label="AI builder">
             <button
