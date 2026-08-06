@@ -117,51 +117,6 @@ export function ReviewResponseAgents({ onCreateAgent }: { onCreateAgent?: () => 
 
   return (
     <div className="flex flex-1 flex-col gap-6 p-6">
-      {/* AI Banner — compact left-aligned gradient */}
-      <div className="relative overflow-hidden rounded-2xl px-7 py-6">
-        {/* Gradient fill — light */}
-        <div
-          className="pointer-events-none absolute inset-0 dark:hidden"
-          style={{ background: "linear-gradient(115deg, #7c3aed 0%, #4f46e5 46%, #2563eb 100%)" }}
-        />
-        {/* Gradient fill — dark */}
-        <div
-          className="pointer-events-none absolute inset-0 hidden dark:block"
-          style={{ background: "linear-gradient(115deg, #4c1d95 0%, #3730a3 48%, #1d4ed8 100%)" }}
-        />
-        {/* Dotted texture — dense at the edges, fading toward the centre */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-70"
-          style={{
-            backgroundImage: "radial-gradient(rgba(255,255,255,0.35) 1.4px, transparent 1.5px)",
-            backgroundSize: "18px 18px",
-            WebkitMaskImage: "linear-gradient(90deg, #000 0%, transparent 30%, transparent 70%, #000 100%)",
-            maskImage: "linear-gradient(90deg, #000 0%, transparent 30%, transparent 70%, #000 100%)",
-          }}
-        />
-
-        {/* Content */}
-        <div className="relative flex items-center justify-between gap-6">
-          {/* Left — headline + description */}
-          <div className="flex flex-col gap-0.5">
-            <h2 className="text-xl font-bold leading-tight tracking-tight text-white">
-              Unlock the Power of AI Agents
-            </h2>
-            <p className="max-w-xl text-sm leading-relaxed text-white/80">
-              Automate review responses, save time, and get more done across every location.
-            </p>
-          </div>
-          {/* Right — single primary CTA, vertically centered */}
-          <button
-            onClick={() => setWhatsNewOpen(true)}
-            className="shrink-0 rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-indigo-700 shadow-sm transition-all duration-200 hover:scale-[1.03] hover:bg-white/95 active:scale-100"
-          >
-            See What's New
-          </button>
-        </div>
-      </div>
-
-
       {/* Header */}
       <div className="flex items-center justify-between">
         <h1 className="text-xl font-semibold text-foreground">Review response agents</h1>
