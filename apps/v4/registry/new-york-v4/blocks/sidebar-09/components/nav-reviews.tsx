@@ -68,7 +68,7 @@ export function NavReviews({
                   <span className="flex items-center gap-1.5">
                     {item.title}
                     {item.title === "Agents" && (
-                      <Sparkle className="size-3.5 text-violet-500 dark:text-violet-400" fill="currentColor" strokeWidth={0} />
+                      <Sparkle className="size-3.5 text-violet-700 dark:text-violet-400" fill="currentColor" strokeWidth={0} />
                     )}
                   </span>
                   <ChevronRight className="ml-auto transition-transform duration-300 ease-in-out group-data-[state=open]/collapsible:rotate-90" />
