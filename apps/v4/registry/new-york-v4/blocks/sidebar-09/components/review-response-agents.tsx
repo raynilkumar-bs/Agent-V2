@@ -10,19 +10,25 @@ import {
   Clock,
   Code2,
   FileText,
+  Flag,
   GraduationCap,
+  Heart,
+  LifeBuoy,
   Loader,
   MessageCircle,
   MessageSquare,
   MoreHorizontal,
   Palette,
   Search,
+  Send,
   ShieldCheck,
   SlidersHorizontal,
   Sparkle,
   Target,
+  ThumbsUp,
   TrendingDown,
   TrendingUp,
+  TriangleAlert,
 } from "lucide-react"
 
 import { Badge } from "@/registry/new-york-v4/ui/badge"
@@ -259,141 +265,67 @@ export function ReviewResponseAgents({ onCreateAgent }: { onCreateAgent?: () => 
           <div className="grid grid-cols-4 gap-4">
             {[
               {
-                bg: "radial-gradient(ellipse at 20% 50%, rgba(147,197,253,0.8) 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, rgba(165,180,252,0.7) 0%, transparent 55%), #dbeafe",
-                icons: ["🔵", "⭐", "✓"],
+                icon: FileText,
+                tile: "bg-blue-50 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300",
                 title: "Professional Response",
                 desc: "Craft formal, polished replies that maintain your brand's professional tone across all customer touchpoints.",
               },
               {
-                bg: "radial-gradient(ellipse at 30% 60%, rgba(216,180,254,0.8) 0%, transparent 55%), radial-gradient(ellipse at 70% 20%, rgba(249,168,212,0.6) 0%, transparent 60%), #f3e8ff",
-                icons: ["📝", "🤖", "⚡"],
+                icon: Heart,
+                tile: "bg-rose-50 text-rose-700 dark:bg-rose-500/10 dark:text-rose-300",
                 title: "Friendly Thank You",
                 desc: "Warm, genuine acknowledgements that make customers feel valued after sharing positive feedback.",
               },
               {
-                bg: "radial-gradient(ellipse at 25% 55%, rgba(110,231,183,0.7) 0%, transparent 55%), radial-gradient(ellipse at 75% 25%, rgba(147,197,253,0.5) 0%, transparent 60%), #d1fae5",
-                icons: ["🌟", "💬", "✦"],
+                icon: LifeBuoy,
+                tile: "bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300",
                 title: "Service Recovery",
                 desc: "Turn negative reviews into opportunities by responding with care and commitment to improvement.",
               },
               {
-                bg: "radial-gradient(ellipse at 20% 60%, rgba(251,207,232,0.9) 0%, transparent 55%), radial-gradient(ellipse at 80% 30%, rgba(216,180,254,0.6) 0%, transparent 55%), #fce7f3",
-                icons: ["✦", "💬", "🤖"],
+                icon: Palette,
+                tile: "bg-violet-50 text-violet-700 dark:bg-violet-500/10 dark:text-violet-300",
                 title: "Brand Voice Match",
                 desc: "AI-tuned responses that precisely mirror your brand's unique tone and personality across every interaction.",
               },
               {
-                bg: "radial-gradient(ellipse at 30% 50%, rgba(253,186,116,0.8) 0%, transparent 55%), radial-gradient(ellipse at 75% 25%, rgba(252,165,165,0.6) 0%, transparent 55%), #ffedd5",
-                icons: ["⚡", "🌟", "✓"],
+                icon: TriangleAlert,
+                tile: "bg-orange-50 text-orange-700 dark:bg-orange-500/10 dark:text-orange-300",
                 title: "Issue Acknowledgement",
                 desc: "Empathetic responses that acknowledge concerns and reassure customers their experience truly matters.",
               },
               {
-                bg: "radial-gradient(ellipse at 25% 55%, rgba(165,180,252,0.8) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(147,197,253,0.6) 0%, transparent 60%), #e0e7ff",
-                icons: ["🔵", "📝", "⭐"],
+                icon: ThumbsUp,
+                tile: "bg-indigo-50 text-indigo-700 dark:bg-indigo-500/10 dark:text-indigo-300",
                 title: "Positive Reinforcement",
                 desc: "Amplify great reviews by crafting responses that encourage loyalty and inspire others to share experiences.",
               },
               {
-                bg: "radial-gradient(ellipse at 20% 60%, rgba(167,243,208,0.8) 0%, transparent 55%), radial-gradient(ellipse at 80% 20%, rgba(110,231,183,0.5) 0%, transparent 55%), #ecfdf5",
-                icons: [],
+                icon: Send,
+                tile: "bg-teal-50 text-teal-700 dark:bg-teal-500/10 dark:text-teal-300",
                 title: "Smart Follow-up",
                 desc: "Timely, personalised follow-up messages that re-engage customers and build lasting relationships after their review.",
               },
               {
-                bg: "radial-gradient(ellipse at 25% 55%, rgba(253,186,116,0.7) 0%, transparent 55%), radial-gradient(ellipse at 80% 25%, rgba(252,211,77,0.5) 0%, transparent 55%), #fffbeb",
-                icons: [],
+                icon: Flag,
+                tile: "bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-300",
                 title: "Escalation Handler",
                 desc: "Professionally escalate critical reviews to management while keeping customers informed and reassured throughout.",
               },
             ].map((tpl, i) => (
-              <div key={i} className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-border/60 bg-card transition-all duration-300 hover:shadow-md">
-                {/* Centered wireframe on gradient */}
-                <div className="flex h-44 items-center justify-center px-5" style={{ background: tpl.bg }}>
-                  <div className="w-full rounded-2xl bg-white p-4 shadow-sm ring-1 ring-black/[0.06]">
-                    {i === 0 && (
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2.5">
-                          <div className="size-7 shrink-0 animate-pulse rounded-full bg-slate-200" />
-                          <div className="flex-1 space-y-1.5">
-                            <div className="h-2 w-24 animate-pulse rounded-full bg-slate-200" />
-                            <div className="flex gap-0.5">{[0,1,2,3,4].map(s=><svg key={s} width="9" height="9" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}</div>
-                          </div>
-                        </div>
-                        <div className="space-y-1.5">
-                          <div className="h-2 w-full animate-pulse rounded-full bg-slate-100" />
-                          <div className="h-2 w-4/5 animate-pulse rounded-full bg-slate-100" />
-                        </div>
-                        <div className="rounded-xl bg-violet-50 p-2.5 ring-1 ring-violet-100">
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-[9px] font-semibold text-violet-600">✦ AI generating</span>
-                            <div className="ml-auto flex gap-0.5">{[0,1,2].map(d=><span key={d} className="size-1 animate-bounce rounded-full bg-violet-400" style={{animationDelay:`${d*150}ms`}}/>)}</div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                    {i === 1 && (
-                      <div className="space-y-2.5">
-                        <div className="flex justify-start"><div className="rounded-2xl rounded-tl-sm bg-slate-100 px-3 py-2"><div className="h-2 w-28 animate-pulse rounded-full bg-slate-300" /><div className="mt-1.5 h-2 w-20 animate-pulse rounded-full bg-slate-200" /></div></div>
-                        <div className="flex justify-end"><div className="rounded-2xl rounded-tr-sm bg-violet-100 px-3 py-2"><div className="h-2 w-24 animate-pulse rounded-full bg-violet-300" /><div className="mt-1.5 h-2 w-16 animate-pulse rounded-full bg-violet-200" /></div></div>
-                        <div className="flex items-center gap-1.5"><span className="text-[9px] font-semibold text-violet-500">✦ AI drafting</span><div className="flex gap-0.5">{[0,1,2].map(d=><span key={d} className="size-1 animate-bounce rounded-full bg-violet-300" style={{animationDelay:`${d*150}ms`}}/>)}</div></div>
-                      </div>
-                    )}
-                    {i === 2 && (
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between"><div className="flex h-5 items-center rounded-lg bg-red-100 px-2"><span className="text-[9px] font-semibold text-red-600">1-star Review</span></div><div className="h-2 w-12 animate-pulse rounded-full bg-slate-100" /></div>
-                        <div className="space-y-1.5"><div className="h-2 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-2 w-3/5 animate-pulse rounded-full bg-slate-100" /></div>
-                        <div className="flex items-center gap-2"><div className="h-5 flex-1 animate-pulse rounded-lg bg-slate-100" /><div className="flex h-5 items-center rounded-lg bg-emerald-100 px-2"><span className="text-[9px] font-semibold text-emerald-600">Resolved ✓</span></div></div>
-                      </div>
-                    )}
-                    {i === 3 && (
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2.5"><div className="flex size-7 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-pink-400 to-rose-500 text-[9px] font-bold text-white">B</div><div className="space-y-1.5"><div className="h-2 w-20 animate-pulse rounded-full bg-slate-200" /><div className="h-1.5 w-14 animate-pulse rounded-full bg-slate-100" /></div></div>
-                        <div className="flex flex-wrap gap-1">{["Friendly","Professional","Warm"].map(t=><div key={t} className="rounded-full bg-slate-100 px-2 py-0.5 text-[9px] text-slate-500">{t}</div>)}</div>
-                        <div className="h-2 w-full animate-pulse rounded-full bg-slate-100" />
-                      </div>
-                    )}
-                    {i === 4 && (
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between"><div className="flex h-5 items-center gap-1 rounded-lg bg-orange-100 px-2"><span className="text-[9px] font-semibold text-orange-600">⚠ Issue</span></div><span className="text-[9px] text-slate-400">#2841</span></div>
-                        <div className="space-y-1.5"><div className="h-2 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-2 w-2/3 animate-pulse rounded-full bg-slate-100" /></div>
-                        <div className="flex items-center gap-2"><div className="size-5 animate-pulse rounded-full bg-slate-200" /><div className="h-2 w-16 animate-pulse rounded-full bg-slate-100" /><div className="ml-auto flex h-5 items-center rounded-lg bg-blue-100 px-2"><span className="text-[9px] text-blue-600">In Review</span></div></div>
-                      </div>
-                    )}
-                    {i === 5 && (
-                      <div className="space-y-3">
-                        <div className="flex gap-0.5">{[0,1,2,3,4].map(s=><svg key={s} width="12" height="12" viewBox="0 0 24 24"><path fill="#fbbf24" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>)}</div>
-                        <div className="space-y-1.5"><div className="h-2 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-2 w-5/6 animate-pulse rounded-full bg-slate-100" /><div className="h-2 w-3/4 animate-pulse rounded-full bg-slate-100" /></div>
-                        <div className="flex items-center gap-2"><div className="size-5 animate-pulse rounded-full bg-slate-200" /><div className="h-2 w-14 animate-pulse rounded-full bg-slate-100" /></div>
-                      </div>
-                    )}
-                    {i === 6 && (
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2"><div className="flex h-5 items-center rounded-lg bg-emerald-100 px-2"><span className="text-[9px] font-semibold text-emerald-600">Follow-up</span></div><div className="h-2 w-16 animate-pulse rounded-full bg-slate-100 ml-auto" /></div>
-                        <div className="space-y-1.5"><div className="h-2 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-2 w-4/5 animate-pulse rounded-full bg-slate-100" /></div>
-                        <div className="rounded-xl bg-emerald-50 p-2.5 ring-1 ring-emerald-100">
-                          <div className="flex items-center gap-1.5"><span className="text-[9px] font-semibold text-emerald-600">✦ Scheduled</span><div className="ml-auto flex gap-0.5">{[0,1,2].map(d=><span key={d} className="size-1 animate-bounce rounded-full bg-emerald-400" style={{animationDelay:`${d*150}ms`}}/>)}</div></div>
-                        </div>
-                      </div>
-                    )}
-                    {i === 7 && (
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between"><div className="flex h-5 items-center gap-1 rounded-lg bg-amber-100 px-2"><span className="text-[9px] font-semibold text-amber-700">🔺 Escalated</span></div><span className="text-[9px] text-slate-400">Mgr notified</span></div>
-                        <div className="space-y-1.5"><div className="h-2 w-full animate-pulse rounded-full bg-slate-100" /><div className="h-2 w-3/5 animate-pulse rounded-full bg-slate-100" /></div>
-                        <div className="flex items-center gap-2"><div className="size-5 animate-pulse rounded-full bg-amber-200" /><div className="h-2 w-16 animate-pulse rounded-full bg-slate-100" /><div className="ml-auto flex h-5 items-center rounded-lg bg-amber-100 px-2"><span className="text-[9px] text-amber-700">Pending</span></div></div>
-                      </div>
-                    )}
+              <div key={i} className="group flex cursor-pointer flex-col rounded-2xl border border-border/60 bg-card p-5 transition-all duration-300 hover:shadow-md">
+                {/* Icon + title */}
+                <div className="flex items-center gap-3">
+                  <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${tpl.tile}`}>
+                    <tpl.icon className="size-5" />
                   </div>
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-1 flex-col gap-2 p-4">
                   <p className="text-sm font-semibold text-foreground">{tpl.title}</p>
-                  <p className="line-clamp-3 flex-1 text-xs leading-relaxed text-muted-foreground">{tpl.desc}</p>
-                  <Button variant="outline" size="sm" className="mt-2 w-full opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                    Use Template
-                  </Button>
                 </div>
+                {/* Description */}
+                <p className="mt-3 line-clamp-3 flex-1 text-xs leading-relaxed text-muted-foreground">{tpl.desc}</p>
+                <Button variant="outline" size="sm" className="mt-4 w-full opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                  Use Template
+                </Button>
               </div>
             ))}
           </div>
