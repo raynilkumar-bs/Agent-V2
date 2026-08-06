@@ -313,7 +313,18 @@ export function ReviewResponseAgents({ onCreateAgent }: { onCreateAgent?: () => 
                 desc: "Professionally escalate critical reviews to management while keeping customers informed and reassured throughout.",
               },
             ].map((tpl, i) => (
-              <div key={i} className="group flex cursor-pointer flex-col rounded-2xl border border-border/60 bg-card p-5 transition-all duration-300 hover:shadow-md">
+              <div key={i} className="group relative flex cursor-pointer flex-col rounded-2xl border border-border/60 bg-card p-5 transition-all duration-300 hover:shadow-md">
+                {/* AI gradient stroke — fades in on hover */}
+                <div
+                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    padding: "1px",
+                    background: "linear-gradient(135deg, #7c3aed, #ec4899, #3b82f6)",
+                    WebkitMask: "linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0)",
+                    WebkitMaskComposite: "xor",
+                    maskComposite: "exclude",
+                  }}
+                />
                 {/* Icon + title */}
                 <div className="flex items-center gap-3">
                   <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${tpl.tile}`}>
