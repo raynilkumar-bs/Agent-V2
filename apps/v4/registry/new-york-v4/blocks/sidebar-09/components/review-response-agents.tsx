@@ -58,99 +58,11 @@ import {
 } from "@/registry/new-york-v4/ui/tabs"
 
 const stats = [
-  { value: "835", delta: "+1.3%", today: "+12 today", trend: "up", label: "Reviews responded",
-    line: "#3b82f6", data: [4, 6, 5, 9],
-    wash: "radial-gradient(120% 90% at 82% -12%, rgba(96,165,250,0.22) 0%, rgba(129,140,248,0.10) 38%, transparent 70%), radial-gradient(70% 55% at 110% 115%, rgba(96,165,250,0.09) 0%, transparent 60%)", spark: "rgba(59,130,246,0.5)" },
-  { value: "92%", delta: "+1.3%", today: "+2% today", trend: "up", label: "Response rate",
-    line: "#f97316", data: [4, 6, 5, 8],
-    wash: "radial-gradient(120% 90% at 82% -12%, rgba(251,146,60,0.19) 0%, rgba(253,186,116,0.09) 38%, transparent 70%), radial-gradient(70% 55% at 110% 115%, rgba(251,146,60,0.07) 0%, transparent 60%)", spark: "rgba(234,88,12,0.45)" },
-  { value: "20m", delta: "-0.5%", today: "-1m today", trend: "down", label: "Average response time",
-    line: "#a855f7", data: [9, 7, 8, 5],
-    wash: "radial-gradient(120% 90% at 82% -12%, rgba(168,85,247,0.19) 0%, rgba(196,181,253,0.10) 38%, transparent 70%), radial-gradient(70% 55% at 110% 115%, rgba(168,85,247,0.07) 0%, transparent 60%)", spark: "rgba(147,51,234,0.45)" },
-  { value: "6h 20m", delta: "+1.3%", today: "+30m today", trend: "up", label: "Time saved",
-    line: "#06b6d4", data: [3, 5, 6, 8],
-    wash: "radial-gradient(120% 90% at 82% -12%, rgba(34,211,238,0.19) 0%, rgba(103,232,249,0.09) 38%, transparent 70%), radial-gradient(70% 55% at 110% 115%, rgba(34,211,238,0.07) 0%, transparent 60%)", spark: "rgba(8,145,178,0.45)" },
+  { value: "835", delta: "+1.3%", today: "+12 today", trend: "up", label: "Reviews responded" },
+  { value: "92%", delta: "+1.3%", today: "+2% today", trend: "up", label: "Response rate" },
+  { value: "20m", delta: "-0.5%", today: "-1m today", trend: "down", label: "Average response time" },
+  { value: "6h 20m", delta: "+1.3%", today: "+30m today", trend: "up", label: "Time saved" },
 ]
-
-// Top-rounded bar path (square bottom, rounded top corners).
-function barPath(x: number, y: number, w: number, h: number, r: number) {
-  const rr = Math.min(r, w / 2, h)
-  return `M${x} ${y + h} L${x} ${y + rr} Q${x} ${y} ${x + rr} ${y} L${x + w - rr} ${y} Q${x + w} ${y} ${x + w} ${y + rr} L${x + w} ${y + h} Z`
-}
-
-// Modern corner bar-chart for the metric cards — chunky gradient bars + soft shadow.
-function Sparkline({ data, color }: { data: number[]; color: string }) {
-  const w = 108
-  const h = 46
-  const min = Math.min(...data)
-  const max = Math.max(...data)
-  const range = max - min || 1
-  const gap = 8
-  const bw = (w - gap * (data.length - 1)) / data.length
-  const gid = React.useId()
-  return (
-    <svg
-      width={w}
-      height={h}
-      viewBox={`0 0 ${w} ${h}`}
-      className="pointer-events-none block"
-      aria-hidden
-      style={{ filter: `drop-shadow(0 3px 6px ${color}45)` }}
-    >
-      <defs>
-        <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor={color} stopOpacity="1" />
-          <stop offset="100%" stopColor={color} stopOpacity="0.45" />
-        </linearGradient>
-      </defs>
-      <style>{`
-        @keyframes wfBarGrow { from { transform: scaleY(0) } to { transform: scaleY(1) } }
-        .wf-bar { transition: transform 260ms cubic-bezier(0.22,1,0.36,1); }
-        .metric-card:hover .wf-bar { transform: scaleY(1.08); }
-        @media (prefers-reduced-motion: reduce) { .wf-bar { animation: none !important; transition: none !important } }
-      `}</style>
-      {data.map((d, i) => {
-        const bh = 10 + ((d - min) / range) * (h - 12)
-        return (
-          <path
-            key={i}
-            className="wf-bar"
-            d={barPath(i * (bw + gap), h - bh, bw, bh, 4)}
-            fill={`url(#${gid})`}
-            style={{
-              transformBox: "fill-box",
-              transformOrigin: "bottom",
-              transitionDelay: `${i * 45}ms`,
-              animation: `wfBarGrow 600ms cubic-bezier(0.22,1,0.36,1) ${i * 90}ms backwards`,
-            }}
-          />
-        )
-      })}
-    </svg>
-  )
-}
-
-// Faint sparkle glints for the metric-card corner wash (reference concept, kept soft).
-function CardSparkles({ color }: { color: string }) {
-  const stars = [
-    { x: 78, y: 22, s: 11, o: 0.2 },
-    { x: 97, y: 47, s: 7, o: 0.13 },
-    { x: 60, y: 45, s: 6, o: 0.09 },
-  ]
-  return (
-    <svg aria-hidden className="pointer-events-none absolute right-1 top-1 h-24 w-28" viewBox="0 0 112 96" fill="none">
-      {stars.map((p, i) => (
-        <path
-          key={i}
-          opacity={p.o}
-          fill={color}
-          transform={`translate(${p.x} ${p.y}) scale(${p.s / 24}) translate(-12 -12)`}
-          d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"
-        />
-      ))}
-    </svg>
-  )
-}
 
 const agents = [
   { id: "1", name: "Reply using templates", status: "Running", reviews: 102, reviewTrend: "up", rate: "15%", rateTrend: "up", avgTime: "20m", avgTrend: "down", saved: "4h 20m", locations: 500 },
@@ -292,17 +204,10 @@ export function ReviewResponseAgents({ onCreateAgent }: { onCreateAgent?: () => 
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="metric-card relative overflow-hidden rounded-2xl border border-border/60 bg-card p-5"
+                className="rounded-2xl border border-border/60 bg-card p-5 transition-colors duration-200 hover:bg-muted/50"
               >
-                {/* Soft corner color wash + faint sparkles */}
-                <div className="pointer-events-none absolute inset-0" style={{ background: stat.wash }} />
-                <CardSparkles color={stat.spark} />
-                {/* Corner bar chart — clipped by the card's bottom edge */}
-                <div className="pointer-events-none absolute -bottom-1 right-3 w-28">
-                  <Sparkline data={stat.data} color={stat.line} />
-                </div>
                 {/* Content */}
-                <div className="relative">
+                <div>
                   <p className="text-xs font-medium text-muted-foreground">{stat.label}</p>
                   <p className="mt-2 text-3xl font-bold tracking-tight text-foreground">{stat.value}</p>
                   <div className="mt-3 flex items-center gap-2">
